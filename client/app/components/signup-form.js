@@ -1,13 +1,17 @@
 import Ember from 'ember';
 
-// const { service } = Ember.inject;
-
 export default Ember.Component.extend({
   session: Ember.inject.service('session'),
+  store: Ember.inject.service(),
   actions: {
     submit() {
-      let user = this.get('user');
-      this.attrs.triggerSave(user);
+      let user = this.get('store').createRecord('user');
+      user.set('name', 'Ivan');
+      user.set('email', 'Ivan@ivanov.com');
+      user.set('password', '456789');
+      user.set('password_confirm', '456789');
+      user.save();
+    //   this.attrs.triggerSave(user);
     }
  }
 });
