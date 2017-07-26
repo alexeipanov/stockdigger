@@ -3,6 +3,14 @@ class UsersController < ApplicationController
         @user = User.create(post_params)
     end
 
+    def me
+        render json: current_user
+    end
+
+    def show
+
+    end
+
     private
 
     def post_params

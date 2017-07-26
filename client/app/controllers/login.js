@@ -1,13 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    session: Ember.inject.service('session'),
-    actions: {
-    authenticate() {
-      let { identification, password } = this.getProperties('identification', 'password');
-      this.get('session').authenticate('authenticator:devise', identification, password).catch((reason) => {
-        this.set('errorMessage', reason.error || reason);
-      });
+  session: Ember.inject.service(),
+  actions: {
+    authenticate: function() {
+      var credentials = this.getProperties('identification', 'password'),
+        authenticator = 'authenticator:jwt';
+      this.get('session').authenticate(authenticator,
+        credentials).catch((reason)=>{
+        this.set('errorMessage', reason.statusText);
+    }).finally(() => {
+        this.transitionToRoute('profile');
+    });
     }
   }
 });
