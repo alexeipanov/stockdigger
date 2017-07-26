@@ -4,14 +4,16 @@ export default Ember.Controller.extend({
   session: Ember.inject.service(),
   actions: {
     authenticate: function() {
-      var credentials = this.getProperties('identification', 'password'),
+      let credentials = this.getProperties('identification', 'password'),
         authenticator = 'authenticator:jwt';
-      this.get('session').authenticate(authenticator,
-        credentials).catch((reason)=>{
-        this.set('errorMessage', reason.statusText);
-    }).finally(() => {
-        this.transitionToRoute('profile');
-    });
-},
+      this.get('session').authenticate(authenticator, credentials).then(
+        () => {
+          this.transitionToRoute('profile');
+        },
+        (reason) => {
+          this.set('errorMessage', reason.statusText);
+        }
+      );
+    },
   }
 });

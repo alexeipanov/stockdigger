@@ -6,12 +6,9 @@ export default Ember.Component.extend({
   actions: {
     submit() {
       let user = this.get('store').createRecord('user');
-      user.set('name', 'Ivan');
-      user.set('email', 'Ivan@ivanov.com');
-      user.set('password', '456789');
-      user.set('password_confirm', '456789');
+      let formFields = this.getProperties('name', 'email', 'password', 'password_confirm');
+      user.setProperties(formFields);
       user.save();
-    //   this.attrs.triggerSave(user);
     }
  }
 });

@@ -1,2 +1,6 @@
-<p>Hello, {{model.user.name}}!</p>
-<a href="/login" {{action 'logout'}}>Logout</a>
+{{#if session.isAuthenticated}}
+    <p>Hello, {{model.user.name}}!</p>
+    <a href="/login" {{action 'logout'}}>Logout</a>
+{{else}}
+    {{#link-to 'login'}}Login{{/link-to}}
+{{/if}}

@@ -6,9 +6,11 @@ export default Ember.Service.extend({
   store: Ember.inject.service(),
   load() {
     if (this.get('session.isAuthenticated')) {
-        return RSVP.hash({
-            user: this.get('store').queryRecord('user', { me: true })
-        });
+      return RSVP.hash({
+        user: this.get('store').queryRecord('user', {
+          me: true
+        })
+      });
     }
   }
 

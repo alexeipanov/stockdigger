@@ -3,7 +3,7 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
   actions: {
     save(user) {
-      // more code coming soon!
+
     }
   }
 });
