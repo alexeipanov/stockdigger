@@ -12,6 +12,6 @@ export default Ember.Controller.extend({
     }).finally(() => {
         this.transitionToRoute('profile');
     });
-    }
+},
   }
 });
