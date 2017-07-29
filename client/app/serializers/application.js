@@ -10,15 +10,3 @@ export default DS.JSONAPISerializer.extend({
       return Ember.String.underscore(rawKey);
     }
 });
-
-
-// app/serializers/application.js
-// import Ember from 'ember';
-// import JSONAPISerializer from 'ember-data/serializers/json-api';
-//
-// const { underscore } = Ember.String;
-//
-// export default JSONAPISerializer.extend({
-//
-// });
-//
