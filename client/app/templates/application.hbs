@@ -1,0 +1,20 @@
+<header>
+    <div class="logo">
+        Photoctock Tracker
+    </div>
+    <div class="nav">
+      {{#if session.isAuthenticated}}
+        <a href="#">{{currentUser.user.name}}</a>
+        <a href="#" {{action 'invalidateSession'}}>Logout</a>
+      {{else}}
+        {{#link-to 'login'}}Login{{/link-to}}
+        {{#link-to 'signup'}}Sign Up{{/link-to}}
+      {{/if}}
+    </div>
+</header>
+<main>
+  {{outlet}}
+</main>
+<footer>
+  
+</footer>

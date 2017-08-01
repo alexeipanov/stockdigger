@@ -1,0 +1,13 @@
+@import 'vars';
+@import 'functions';
+
+button,
+input[type="button"] {
+  color: _color(text-bg);
+  background-color: _color(accent);
+  border-radius: 2px;
+  border: none;
+  margin-bottom: 0.5 * _size(page-padding);
+  padding: 0.25 * _size(page-padding);
+  line-height: 2;
+}

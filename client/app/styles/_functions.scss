@@ -1,0 +1,19 @@
+@function _duration($keys...) {
+	@return val($duration, $keys...);
+}
+
+@function _font($keys...) {
+	@return val($font, $keys...);
+}
+
+@function _misc($keys...) {
+	@return val($misc, $keys...);
+}
+
+@function _color($key) {
+    @return map-get($palette, $key);
+}
+
+@function _size($key) {
+	@return map-get($size, $key);
+}

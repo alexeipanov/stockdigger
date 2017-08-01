@@ -1,0 +1,106 @@
+@import 'vars';
+@import 'functions';
+@import 'roboto';
+@import 'normalize';
+
+@import 'forms';
+@import 'buttons';
+
+body {
+	font-family: 'Roboto';
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.5;
+	text-align: justify;
+	color: _color(text-base);
+
+	&>.ember-view {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+}
+
+h1, h2, h3, h4 {
+	color: _color(text-black);
+	font-weight: 700;
+	text-align: center;
+	margin: 0;
+	line-height: 2.5;
+}
+
+h1 {
+	font-size: 350%;
+}
+
+h2 {
+	font-size: 250%;
+}
+
+h3 {
+	font-size: 150%;
+}
+
+div {
+
+}
+
+p {
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+    }
+}
+
+header, footer, main, section {
+	display: flex;
+}
+
+header {
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 _size(page-padding);
+	background-color: _color(text-black);
+	color: _color(text-bg);
+
+	a {
+		color: inherit;
+	}
+
+	.logo {
+		font-size: 250%;
+	}
+
+	.nav {
+	}
+
+}
+
+main {
+	flex-direction: column;
+	flex-grow: 99999;
+}
+
+section {
+	flex-grow: 1;
+	padding: 2 * _size(page-padding);
+
+	&.center {
+		justify-content: center;
+	}
+}
+
+.page {
+
+}
+
+footer {
+	padding: 2rem 0;
+}

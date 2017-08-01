@@ -1,0 +1,35 @@
+@import 'vars';
+@import 'functions';
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    margin-bottom: 0.5 * _size(page-padding);
+    border: 1px solid _color(border);
+    padding: 0.25 * _size(page-padding);
+    line-height: 1.5;
+    width: 250px;
+    border-radius: 2px;
+
+    &:invalid {
+      border-color: _color(text-error);
+      box-shadow: unset;
+    }
+
+    &:focus {
+      border-color: _color(lead-color);
+      box-shadow: unset;
+    }
+  }
+
+  label {
+    font-size: 85%;
+    margin-bottom: 0.25 * _size(page-padding);
+  }
+
+
+}
