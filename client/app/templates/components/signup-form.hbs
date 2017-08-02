@@ -1,12 +1,42 @@
 <section class="center">
-  <form {{action "submit" on="submit"}}>
+  <div class="wrapper">
     {{#if errorMessage}}
-      <span class="error">{{errorMessage}}</span>
+      <div class="error">{{errorMessage}}</div>
     {{/if}}
-    <label for="name">Name</label> {{input value=name placeholder="enter name" required="required"}}
-    <label for="email">Email</label> {{input value=email placeholder="enter email" required="required"}}
-    <label for="password">Password</label> {{input value=password type="password" placeholder="enter password" required="required"}}
-    <label for="password_confirmation">Password Confirmation</label> {{input value=password_confirmation type="password" placeholder="enter password again" required="required"}}
-    <button type="submit">Submit</button>
-  </form>
+    <form {{action 'submit' on="submit"}}>
+      <label for="name">Name:
+        {{#each user.errors.name as |error|}}
+          <span class="error">
+            {{error.message}}
+          </span>
+        {{/each}}
+      </label>
+      {{input value=name placeholder="enter name" }}
+      <label for="email">Email:
+        {{#each user.errors.email as |error|}}
+          <span class="error">
+            {{error.message}}
+          </span>
+        {{/each}}
+      </label>
+      {{input value=email placeholder="enter email" }}
+      <label for="password">Password:
+        {{#each user.errors.password as |error|}}
+          <span class="error">
+            {{error.message}}
+          </span>
+        {{/each}}
+      </label>
+      {{input value=password type="password" placeholder="enter password" }}
+      <label for="password_confirmation">Password Confirmation:
+        {{#each user.errors.password-confirmation as |error|}}
+          <span class="error">
+            {{error.message}}
+          </span>
+        {{/each}}
+      </label>
+      {{input value=password_confirmation type="password" placeholder="enter password again" }}
+      <button type="submit">Submit</button>
+    </form>
+  </div>
 </section>

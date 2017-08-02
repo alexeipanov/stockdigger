@@ -4,6 +4,7 @@ export default Ember.Component.extend({
   session: Ember.inject.service('session'),
   store: Ember.inject.service(),
   tagName: '',
+  user: null,
   actions: {
     submit() {
       let user = this.get('store').createRecord('user');
@@ -12,8 +13,7 @@ export default Ember.Component.extend({
       user.save().then((user) => {
 
       }, (error) => {
-        console.log(error);
-        this.set('errorMessage', error)
+        this.set('user', user);
       });
     }
  }

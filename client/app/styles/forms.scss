@@ -16,12 +16,12 @@ form {
     border-radius: 2px;
 
     &:invalid {
-      border-color: _color(text-error);
+      border-color: _color(accent);
       box-shadow: unset;
     }
 
     &:focus {
-      border-color: _color(lead-color);
+      border-color: _color(base-color);
       box-shadow: unset;
     }
   }
@@ -30,6 +30,9 @@ form {
     font-size: 85%;
     margin-bottom: 0.25 * _size(page-padding);
   }
+}
 
-
+.error {
+  color: _color(accent);
+  margin-bottom: 0.5 * _size(page-padding);
 }
