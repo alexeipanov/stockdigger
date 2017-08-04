@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('login');
   this.route('profile');
   this.route('signup');
+  this.route('server-down');
 });
 
 export default Router;

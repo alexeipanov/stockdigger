@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:auth/profile', 'Unit | Route | auth/profile', {
+moduleFor('route:server-down', 'Unit | Route | server down', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

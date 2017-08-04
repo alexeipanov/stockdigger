@@ -10,5 +10,5 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
       return `${this.get('host')}/me`;
     }
     return this._super(...arguments);
-}
+  },
 });
