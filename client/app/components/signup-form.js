@@ -11,9 +11,13 @@ export default Ember.Component.extend({
     submit() {
       let user = this.get('store').createRecord('user');
       let formFields = this.getProperties('name', 'email', 'password', 'password_confirmation');
+      let credentials = { identification: this.get('email'), password: this.get('password') };
       user.setProperties(formFields);
       user.save().then((user) => {
         this.set('user', user);
+        this.get('session').authenticate('authenticator:jwt', credentials).then(() => {
+            this.get('router').transitionTo('profile');
+        });
       }, (error) => {
         this.set('user', user);
         user.deleteRecord();
