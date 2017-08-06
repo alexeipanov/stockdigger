@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('profile');
   this.route('signup');
   this.route('server-down');
+  this.route('images');
 });
 
 export default Router;

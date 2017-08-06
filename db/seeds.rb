@@ -6,5 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create! [
-    {name: 'Alexei', email: 'windstarter@gmail.com', password: '456789'}
+    { name: 'Alexei', email: 'windstarter@gmail.com', password: '456789', password_confirmation: '456789' }
+]
+
+User.last.images.create! [
+  { image: '487421065' }
 ]
