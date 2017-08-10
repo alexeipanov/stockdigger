@@ -30,6 +30,10 @@ form {
     font-size: 85%;
     margin-bottom: 0.25 * _size(page-padding);
   }
+
+  button[type="submit"] {
+    width: 250px;
+  }
 }
 
 .error {

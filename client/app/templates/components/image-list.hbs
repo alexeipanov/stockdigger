@@ -1,5 +1,6 @@
 {{#each images as |image| }}
   <figure>
-    {{image.image}}
+    <img src="{{image.url}}">
+    <figcaption>{{image.image}}</figcaption>
   </figure>
 {{/each}}

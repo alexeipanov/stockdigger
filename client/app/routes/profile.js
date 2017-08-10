@@ -5,4 +5,10 @@ export default Ember.Route.extend({
   model() {
     return this.get('currentUser').load();
   },
+  pageTitle: 'Profile',
+  actions: {
+		didTransition() {
+			this.controller.set('pageTitle', this.get('pageTitle'));
+		}
+	},
 });
