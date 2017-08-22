@@ -1,0 +1,20 @@
+<h1>Image Sets</h1>
+<h4>Add Image Set</h4>
+<form class="inline" {{action 'addCollection' on='submit'}}>
+  <div class="field-wrapper">
+    <label for="name">
+        {{#each collection.errors.name as |error|}}
+        <span class="error">
+          {{error.message}}
+        </span>
+      {{/each}}
+    </label>
+    {{input value=name placeholder='Enter Set Name'}}
+    <button type="submit" name="button">Add</button>
+  </div>
+</form>
+<ul class="multi-col">
+{{#each collections as |collection| }}
+  <li>{{#link-to 'index.collection' collection.id}}{{collection.name}}{{/link-to}}</li>
+{{/each}}
+</ul>

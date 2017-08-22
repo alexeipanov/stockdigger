@@ -1,0 +1,15 @@
+<h1>Image Set</h1>
+<h4>{{#link-to 'index.collections'}}Back to All Image Sets{{/link-to}}</h4>
+<form class="inline">
+  <div class="field-wrapper">
+    <label for="name">
+        {{#each collection.errors.name as |error|}}
+        <span class="error">
+          {{error.message}}
+        </span>
+      {{/each}}
+    </label>
+    {{input value=collection.name placeholder='Enter Set Name' change=(action 'save' collection)}}
+    <button type="submit" {{action 'remove' collection on='click'}}>Delete</button>
+  </div>
+</form>

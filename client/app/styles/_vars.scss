@@ -10,8 +10,17 @@ $palette: (
     tcell_header: rgb(174, 215, 235),
     tcell: rgb(255, 255, 255),
     border: rgb(204, 204, 204),
-    base-color: rgb(50, 192, 245),
+    base-color: rgb(0, 185, 255),
     accent: rgb(254, 33, 139),
+    header-bg: rgb(45, 55, 65),
+    header-fg: rgb(200, 205, 220),
+    header-link: lighten(rgb(200, 205, 220), 10%),
+    footer-bg: rgb(45, 55, 65),
+    footer-fg: rgb(200, 205, 220),
+    footer-link: lighten(rgb(200, 205, 220), 10%),
+    sidebar-bg: rgb(55, 65, 80),
+    sidebar-fg: rgb(180, 190, 200),
+    sidebar-link: lighten(rgb(180, 190, 200), 10%),
 );
 
 $size: (

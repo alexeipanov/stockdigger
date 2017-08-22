@@ -1,10 +1,10 @@
 <header>
     <div class="logo">
-        Photoctock Tracker
+      {{#link-to 'index'}}P/T{{/link-to}}
     </div>
     <div class="nav">
       {{#if session.isAuthenticated}}
-        <a href="#">{{currentUser.user.name}}</a>
+        {{#link-to 'profile'}}{{currentUser.user.name}}{{/link-to}}
         <a href="#" {{action 'invalidateSession'}}>Logout</a>
       {{else}}
         {{#link-to 'login'}}Login{{/link-to}}
@@ -16,5 +16,5 @@
   {{outlet}}
 </main>
 <footer>
-  
+
 </footer>

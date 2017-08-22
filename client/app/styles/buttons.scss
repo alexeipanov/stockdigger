@@ -8,7 +8,7 @@ input[type="button"] {
   border-radius: 2px;
   border: 1px solid _color(accent);
   margin-bottom: 0.5 * _size(page-padding);
-  padding: 0.25 * _size(page-padding);
-  line-height: 2;
+  padding: 0.25 * _size(page-padding) 0.5 * _size(page-padding);
   box-sizing: content-box;
+  cursor: pointer;
 }

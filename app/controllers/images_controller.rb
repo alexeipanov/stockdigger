@@ -5,8 +5,7 @@ class ImagesController < ApplicationController
 
   # GET /images
   def index
-    @images = User.find(params[:user_id]).images.all
-
+    @images = User.find(current_user.id).collections.find(params[:collection_id]).images.all
     render json: @images
   end
 
@@ -21,15 +20,14 @@ class ImagesController < ApplicationController
     url = shutter.get_image(image_params[:image])
     merged_params = image_params
     merged_params['url'] = url
-    merged_params['user_id'] = image_params[:user_id]
+    merged_params['user_id'] = current_user.id
     @image = Image.new(merged_params)
     # User.find(params[:user_id]).update()images.new(image_params)
-
     if @image.save
       render json: @image, status: :created
       # , location: @image
     else
-      render json: @image.errors, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
+      render json: @image, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
@@ -48,13 +46,14 @@ class ImagesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_image
-      @image = User.find(params[:user_id]).images.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def image_params
-      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:image, :url, :user, :id ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_image
+    @image = User.find(current_user.id).images.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def image_params
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:image, :url, :collection_id, :collection, :user, :id])
+  end
 end

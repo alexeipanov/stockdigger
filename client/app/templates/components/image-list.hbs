@@ -1,6 +1,8 @@
 {{#each images as |image| }}
   <figure>
-    <img src="{{image.url}}">
-    <figcaption>{{image.image}}</figcaption>
+    {{#link-to 'index.image' image}}
+      <img src="{{image.url}}">
+      <figcaption>{{image.image}}</figcaption>
+    {{/link-to}}
   </figure>
 {{/each}}

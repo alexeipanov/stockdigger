@@ -1,42 +1,38 @@
-<section class="center">
-  <div class="wrapper">
-    {{#if errorMessage}}
-      <div class="error">{{errorMessage}}</div>
-    {{/if}}
-    <form {{action 'submit' on="submit"}}>
-      <label for="name">Name:
-        {{#each user.errors.name as |error|}}
-          <span class="error">
-            {{error.message}}
-          </span>
-        {{/each}}
-      </label>
-      {{input value=name placeholder="enter name" }}
-      <label for="email">Email:
-        {{#each user.errors.email as |error|}}
-          <span class="error">
-            {{error.message}}
-          </span>
-        {{/each}}
-      </label>
-      {{input value=email placeholder="enter email" }}
-      <label for="password">Password:
-        {{#each user.errors.password as |error|}}
-          <span class="error">
-            {{error.message}}
-          </span>
-        {{/each}}
-      </label>
-      {{input value=password type="password" placeholder="enter password" }}
-      <label for="password_confirmation">Password Confirmation:
-        {{#each user.errors.password-confirmation as |error|}}
-          <span class="error">
-            {{error.message}}
-          </span>
-        {{/each}}
-      </label>
-      {{input value=password_confirmation type="password" placeholder="enter password again" }}
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-</section>
+{{#if errorMessage}}
+  <div class="error">{{errorMessage}}</div>
+{{/if}}
+<form {{action 'submit' on="submit"}}>
+  <label for="name">Name:
+    {{#each user.errors.name as |error|}}
+      <span class="error">
+        {{error.message}}
+      </span>
+    {{/each}}
+  </label>
+  {{input value=name placeholder="enter name" }}
+  <label for="email">Email:
+    {{#each user.errors.email as |error|}}
+      <span class="error">
+        {{error.message}}
+      </span>
+    {{/each}}
+  </label>
+  {{input value=email placeholder="enter email" }}
+  <label for="password">Password:
+    {{#each user.errors.password as |error|}}
+      <span class="error">
+        {{error.message}}
+      </span>
+    {{/each}}
+  </label>
+  {{input value=password type="password" placeholder="enter password" }}
+  <label for="password_confirmation">Password Confirmation:
+    {{#each user.errors.password-confirmation as |error|}}
+      <span class="error">
+        {{error.message}}
+      </span>
+    {{/each}}
+  </label>
+  {{input value=password_confirmation type="password" placeholder="enter password again" }}
+  <button type="submit">Submit</button>
+</form>

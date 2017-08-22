@@ -1,0 +1,9 @@
+<h3>Keywords</h3>
+<form>
+  {{#each keywords as |keyword| }}
+    <div class="field-wrapper">
+      {{input value=keyword.keyword change=(action 'save' keyword)}}
+      <button type="submit" name="button" {{action 'remove' keyword on='click'}}>Delete</button>
+    </div>
+  {{/each}}
+</form>

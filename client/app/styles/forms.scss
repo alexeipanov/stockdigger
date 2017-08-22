@@ -8,10 +8,10 @@ form {
   input[type="text"],
   input[type="password"],
   input[type="email"] {
+    box-sizing: content-box;
     margin-bottom: 0.5 * _size(page-padding);
     border: 1px solid _color(border);
-    padding: 0.25 * _size(page-padding);
-    line-height: 1.5;
+    padding: 0.25 * _size(page-padding) 0.5 * _size(page-padding);
     width: 250px;
     border-radius: 2px;
 
@@ -27,12 +27,36 @@ form {
   }
 
   label {
+    width: 250px;
     font-size: 85%;
     margin-bottom: 0.25 * _size(page-padding);
   }
 
   button[type="submit"] {
-    width: 250px;
+    // width: 250px;
+  }
+
+  &.inline {
+    flex-direction: row;
+
+    .field-wrapper {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+
+      label {
+        grid-column: span 2;
+      }
+    }
+
+    input {
+      margin-right: 0.5 * _size(page-padding);
+    }
+
+    button[type="submit"] {
+      width: auto;
+      padding: 0.25 * _size(page-padding) 2 * _size(page-padding);
+    }
   }
 }
 

@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-
     render json: @users
   end
 
@@ -39,17 +38,17 @@ class UsersController < ApplicationController
   end
 
   def me
-      render json: current_user
+    render json: current_user
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(current_user.id)
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name, :email, :password, :password_confirmation])
-    end
+  # Only allow a trusted parameter "white list" through.
+  def user_params
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name, :email, :password, :password_confirmation])
+  end
 end

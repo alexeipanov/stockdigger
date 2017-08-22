@@ -11,7 +11,20 @@ Router.map(function() {
   this.route('profile');
   this.route('signup');
   this.route('server-down');
-  this.route('images');
+
+  this.route('dashboard');
+
+  this.route('index', { path: '/' }, function() {
+    this.route('collections');
+    this.route('collection', { path: '/collections/:collection_id' }, function() {
+      // this.route('keyword'
+        // , { path: '/collections/:collection_id/keywords/:keyword_id' }
+        // );
+    });
+    this.route('images');
+    this.route('keywords');
+    this.route('image', { path: '/images/:image_id' });
+  });
 });
 
 export default Router;

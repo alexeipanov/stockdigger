@@ -8,8 +8,6 @@ export default Ember.Component.extend({
       let image = this.get('store').createRecord('image', {
         user: this.get('currentUser.user')
       });
-//      this.get('currentUser.user').get('images').pushObject(image);
-
       let formFields = this.getProperties('image');
       image.setProperties(formFields);
       image.save().then((image) => {

@@ -4,7 +4,7 @@ export default Ember.Controller.extend({
   actions: {
     onSuccessLogin() {
       // this.transitionTo('profile');
-      this.transitionToRoute('profile');
+      this.transitionToRoute('index');
     }
   }
 });
