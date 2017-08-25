@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     },
     save(keyword) {
       keyword.save().then((keyword) => {
-        console.log('success');
+
       });
     },
   }

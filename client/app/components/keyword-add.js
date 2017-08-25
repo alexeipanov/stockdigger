@@ -9,9 +9,9 @@ export default Ember.Component.extend({
         collection: collection
       });
       keyword.save().then((keyword) => {
-
+        this.set('keyword', '');
       }, (error) => {
-
+        keyword.deleteRecord();
       });
     }
   }

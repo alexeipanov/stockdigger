@@ -17,12 +17,10 @@ Router.map(function() {
   this.route('index', { path: '/' }, function() {
     this.route('collections');
     this.route('collection', { path: '/collections/:collection_id' }, function() {
-      // this.route('keyword'
-        // , { path: '/collections/:collection_id/keywords/:keyword_id' }
-        // );
+
     });
-    this.route('images');
-    this.route('keywords');
+    this.route('keywords', { path: '/collections/:collection_id/keywords' });
+    this.route('images', { path: '/collections/:collection_id/images' });
     this.route('image', { path: '/images/:image_id' });
   });
 });

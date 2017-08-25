@@ -12,7 +12,7 @@ module Stock
       self.client_secret = 'c11b974dd242055c6bd1301a26091c77c4dcb5db'
       self.options = {
         view: 'minimal',
-        fields: 'id,assets/preview/url'
+        fields: 'id,assets/large_thumb/url'
       }
       self.headers = {
         'Authorization' => 'Basic ' + Base64.strict_encode64("#{self.client_id}:#{self.client_secret}"),
@@ -23,7 +23,7 @@ module Stock
     def get_image(id)
       response = HTTParty.get("#{self.base_uri}images/#{id}", query: self.options, headers: self.headers)
       # TODO Add error handling
-      response['assets']['preview']['url']
+      response['assets']['large_thumb']['url']
     end
 
   end

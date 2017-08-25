@@ -4,10 +4,7 @@
       <ul>
         <li>Dashboard</li>
         <li>{{#link-to 'index.collections'}}Image Sets{{/link-to}}
-          <ul>
-            <li>{{#link-to 'index.keywords'}}Keywords{{/link-to}}</li>
-            <li>{{#link-to 'index.images'}}Images{{/link-to}}</li>
-          </ul>
+          {{outlet 'collections-submenu'}}
         </li>
       </ul>
     </aside>

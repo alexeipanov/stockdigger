@@ -13,7 +13,7 @@ export default Ember.Component.extend({
     },
     save(collection) {
       collection.save().then((collection) => {
-        console.log('success');
+
       });
     },
   }

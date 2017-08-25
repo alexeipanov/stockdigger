@@ -5,5 +5,4 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model() {
     return this.store.findAll('collection');
   },
-
 });

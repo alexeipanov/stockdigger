@@ -2,7 +2,7 @@
 <form class="inline" {{action 'addKeyword' collection on='submit'}}>
   <div class="field-wrapper">
     <label for="keyword">
-        {{#each keyword.errors.name as |error|}}
+        {{#each keyword.errors.keyword as |error|}}
         <span class="error">
           {{error.message}}
         </span>

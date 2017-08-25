@@ -11,9 +11,9 @@ export default Ember.Component.extend({
       let formFields = this.getProperties('image');
       image.setProperties(formFields);
       image.save().then((image) => {
-console.log(image);
+
       }, (error) => {
-console.log(error);
+
       });
     }
   }
