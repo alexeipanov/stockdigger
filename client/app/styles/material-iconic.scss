@@ -64,9 +64,19 @@
     content: $icon-picture-box-i;
   }
 }
+.icon-tag {
+  &:before {
+    content: $icon-tag;
+  }
+}
 .icon-picture {
   &:before {
     content: $icon-picture;
+  }
+}
+.icon-bars {
+  &:before {
+    content: $icon-bars;
   }
 }
 .icon-off {
@@ -149,6 +159,11 @@
     content: $icon-radio-checked;
   }
 }
+.icon-plus {
+  &:before {
+    content: $icon-plus;
+  }
+}
 .icon-arrow-bold-left {
   &:before {
     content: $icon-arrow-bold-left;
@@ -197,5 +212,20 @@
 .icon-chevron-top {
   &:before {
     content: $icon-chevron-top;
+  }
+}
+.icon-grid-1 {
+  &:before {
+    content: $icon-grid-1;
+  }
+}
+.icon-grid-2 {
+  &:before {
+    content: $icon-grid-2;
+  }
+}
+.icon-list {
+  &:before {
+    content: $icon-list;
   }
 }
