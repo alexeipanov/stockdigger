@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :positions
   resources :collections do
   	resources :keywords
   	resources :images
