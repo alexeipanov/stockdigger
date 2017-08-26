@@ -4,12 +4,11 @@ export default Ember.Component.extend({
   currentUser: Ember.inject.service('current-user'),
   store: Ember.inject.service(),
   actions: {
-    addImage() {
+    addImage(collection) {
       let image = this.get('store').createRecord('image', {
-        user: this.get('currentUser.user')
+        image: this.get('image'),
+        collection: collection
       });
-      let formFields = this.getProperties('image');
-      image.setProperties(formFields);
       image.save().then((image) => {
 
       }, (error) => {

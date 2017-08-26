@@ -1,8 +1,10 @@
 {{#each images as |image| }}
   <figure>
-    {{#link-to 'index.image' image}}
-      <img src="{{image.url}}">
-      <figcaption>{{image.image}}</figcaption>
-    {{/link-to}}
+    <div class="wrapper">
+      {{#link-to 'index.image' image}}
+        <img src="{{image.url}}">
+      {{/link-to}}
+      <div class="remove"><a href="#" {{action 'remove' image on='click'}}><i class="icon-times"></i></a></div>
+    </div>
   </figure>
 {{/each}}

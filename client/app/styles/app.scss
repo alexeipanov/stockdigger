@@ -1,6 +1,7 @@
 @import 'vars';
 @import 'functions';
 @import 'roboto';
+@import 'material-iconic';
 @import 'normalize';
 
 @import 'forms';
@@ -123,7 +124,50 @@ section {
 
 	.image-grid {
 		display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    figure {
+
+      & > .wrapper {
+        position: relative;
+        height: 100%;
+
+
+        &:hover {
+
+          .remove {
+            opacity: 1;
+          }
+
+        }
+
+        .remove {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          height: 2rem;
+          width: 2rem;
+          background-color: _color(accent);
+          color: _color(text-bg);
+          opacity: 0;
+          transition: opacity _duration(hover);
+
+          i {
+            font-size: 180%;
+            padding: 0;
+            line-height: unset;
+          }
+
+          a {
+            color: _color(text-bg);
+            text-decoration: none;
+          }
+        }
+      }
+    }
 	}
 
   &.sidebar {

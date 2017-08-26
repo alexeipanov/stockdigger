@@ -1,5 +1,5 @@
-@function _duration($keys...) {
-	@return val($duration, $keys...);
+@function _duration($key) {
+	@return map-get($duration, $key);
 }
 
 @function _font($keys...) {

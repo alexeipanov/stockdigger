@@ -4,12 +4,14 @@
 form {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
   input[type="text"],
   input[type="password"],
   input[type="email"] {
     box-sizing: content-box;
     margin-bottom: 0.5 * _size(page-padding);
+    margin-right: 0.5 * _size(page-padding);
     border: 1px solid _color(border);
     padding: 0.25 * _size(page-padding) 0.5 * _size(page-padding);
     width: 250px;
@@ -34,6 +36,41 @@ form {
 
   button[type="submit"] {
     // width: 250px;
+  }
+
+  & > .field-wrapper {
+    display: flex;
+
+    &:hover {
+
+      .remove {
+        opacity: 1;
+      }
+
+    }
+
+    .remove {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 2rem;
+      width: 2rem;
+      background-color: _color(accent);
+      color: _color(text-bg);
+      opacity: 0;
+      transition: opacity _duration(hover);
+
+      i {
+        font-size: 180%;
+        padding: 0;
+        line-height: unset;
+      }
+
+      a {
+        color: _color(text-bg);
+        text-decoration: none;
+      }
+    }
   }
 
   &.inline {

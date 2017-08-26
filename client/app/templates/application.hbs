@@ -5,7 +5,7 @@
     <div class="nav">
       {{#if session.isAuthenticated}}
         {{#link-to 'profile'}}{{currentUser.user.name}}{{/link-to}}
-        <a href="#" {{action 'invalidateSession'}}>Logout</a>
+        <i class="icon-exit"></i><a href="#" {{action 'invalidateSession'}}>Logout</a>
       {{else}}
         {{#link-to 'login'}}Login{{/link-to}}
         {{#link-to 'signup'}}Sign Up{{/link-to}}

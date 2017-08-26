@@ -20,7 +20,7 @@ class ImagesController < ApplicationController
     url = shutter.get_image(image_params[:image])
     merged_params = image_params
     merged_params['url'] = url
-    merged_params['user_id'] = current_user.id
+    # merged_params['user_id'] = current_user.id
     @image = Image.new(merged_params)
     # User.find(params[:user_id]).update()images.new(image_params)
     if @image.save
@@ -42,14 +42,16 @@ class ImagesController < ApplicationController
 
   # DELETE /images/1
   def destroy
-    @image.destroy
+    if @image.destroy
+      render json: @image, status: :no_content
+    end
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_image
-    @image = User.find(current_user.id).images.find(params[:id])
+    @image = User.find(current_user.id).collections.find(params[:collection_id]).images.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.

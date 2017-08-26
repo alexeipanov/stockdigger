@@ -1,5 +1,14 @@
 <h4>Add Image</h4>
-<form {{action 'addImage' on='submit'}}>
-  {{input id='image' value=image placeholder='Enter Image ID'}}
-  <button type="submit" name="button">Add</button>
+<form {{action 'addImage' collection on='submit'}} class="inline">
+  <div class="field-wrapper">
+    <label for="image">
+        {{#each image.errors.image as |error|}}
+        <span class="error">
+          {{error.message}}
+        </span>
+      {{/each}}
+    </label>
+    {{input id='image' value=image placeholder='Enter Image ID'}}
+    <button type="submit" name="button">Add</button>
+  </div>
 </form>
