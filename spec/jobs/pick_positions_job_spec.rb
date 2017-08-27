@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe PickPositionsJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+	context 'jobs' do
+		it 'base job' do
+		  expect(PickPositionsJob.perform_now).to eq(true)
+		end
+	end
 end

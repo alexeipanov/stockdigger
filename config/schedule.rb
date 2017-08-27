@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 5.minutes do
-  runner 'PickPositionsJob.perform_later'
+every 1.day, :at => '4:30 am' do
+  runner 'PickPositionsJob.perform_now'
 end
