@@ -12,16 +12,14 @@ Router.map(function() {
   this.route('signup');
   this.route('server-down');
 
-  this.route('dashboard');
-
   this.route('index', { path: '/' }, function() {
     this.route('collections');
-    this.route('collection', { path: '/collections/:collection_id' }, function() {
-
-    });
+    this.route('collection', { path: '/collections/:collection_id' });
     this.route('keywords', { path: '/collections/:collection_id/keywords' });
     this.route('images', { path: '/collections/:collection_id/images' });
     this.route('image', { path: '/images/:image_id' });
+    this.route('statistics');
+    this.route('statistic', { path: '/collections/:collection_id/statistics' });
   });
 });
 

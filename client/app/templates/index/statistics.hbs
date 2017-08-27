@@ -1,0 +1,6 @@
+<h1>{{pageTitle}}</h1>
+<ul class="multi-col">
+{{#each model as |collection| }}
+  <li>{{#link-to 'index.statistic' collection.id}}{{collection.name}}{{/link-to}}</li>
+{{/each}}
+</ul>
