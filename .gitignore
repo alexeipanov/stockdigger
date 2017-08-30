@@ -23,3 +23,5 @@ tmp/
 .byebug_history
 
 /client/public/
+# Ignore encrypted secrets key file.
+config/secrets.yml.key
