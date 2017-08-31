@@ -51,9 +51,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "active_model_serializers"
 
-#group :development do
+# group :development do
 #  gem 'ember-cli-rails'
-#end
+# end
 
 group :production do
     gem 'mysql2'

@@ -14,7 +14,7 @@ module.exports = function(environment) {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-        'ds-extended-errors': true
+        // 'ds-extended-errors': true
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
@@ -34,6 +34,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.baseURI = 'http://localhost'
     ENV.port = 3000;
   }
 
@@ -49,7 +50,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-      ENV.port = 80;
+    ENV.baseURI = 'http://stockdigger.info'
+    ENV.port = 80;
   }
 
   return ENV;

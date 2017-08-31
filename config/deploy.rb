@@ -46,7 +46,7 @@ append :linked_files, "config/secrets.yml.key"
 
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-append :linked_dirs, "log", "pids", "cache", "public/system"
+append :linked_dirs, "log", "pids", "cache"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
