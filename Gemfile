@@ -60,4 +60,4 @@ group :production do
 end
 
 gem 'knock'
-gem 'whenever'
+gem 'whenever', require: false
