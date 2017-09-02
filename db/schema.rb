@@ -12,14 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170826154600) do
 
-  create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "name"
-    t.string "password_digest"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "collections", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
@@ -55,5 +47,12 @@ ActiveRecord::Schema.define(version: 20170826154600) do
     t.index ["keyword_id"], name: "index_positions_on_keyword_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

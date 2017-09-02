@@ -233,7 +233,7 @@ footer {
   grid-template-columns: auto auto;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 0;
+  padding: _size(element-margin) _size(page-padding);
   background-color: _color(footer-bg);
   color: _color(footer-fg);
 

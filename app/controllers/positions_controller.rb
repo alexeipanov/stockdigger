@@ -3,8 +3,8 @@ class PositionsController < ApplicationController
 
   # GET /positions
   def index
-    @positions = Position.all
-
+    # @positions = Position.joins(:image, :keyword).where('keywords.collection_id = :collection AND images.collection_id = :collection', { collection: params[:collection_id] })
+    @positions = Position.joins(:image).where('keyword_id = :keyword AND images.collection_id = :collection', { collection: params[:collection_id], keyword: params[:keyword_id] })
     render json: @positions
   end
 
@@ -46,6 +46,7 @@ class PositionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def position_params
-      params.require(:position).permit(:position, :image_id, :keyword_id)
+      # params.require(:position).permit(:position, :image_id, :keyword_id)
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:position, :image_id, :keyword_id, :collection_id, :user, :id, :collection])
     end
 end

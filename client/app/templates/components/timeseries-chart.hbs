@@ -1,1 +1,9 @@
 <div id="chart"></div>
+<label>Select keyword:
+<select onchange={{action 'keywordSelect' value='target.value'}}>
+  {{#each data.keywords as |keyword|}}
+    <option value="{{keyword.id}}">{{keyword.keyword}}</option>
+  {{/each}}
+</select>
+</label>
+<img src="{{currentImage}}">
