@@ -3,7 +3,6 @@ class PositionsController < ApplicationController
 
   # GET /positions
   def index
-    # @positions = Position.joins(:image, :keyword).where('keywords.collection_id = :collection AND images.collection_id = :collection', { collection: params[:collection_id] })
     @positions = Position.joins(:image).where('keyword_id = :keyword AND images.collection_id = :collection', { collection: params[:collection_id], keyword: params[:keyword_id] })
     render json: @positions
   end
