@@ -32,10 +32,31 @@ export default Ember.Component.extend({
           axis: {
             x: {
               type: 'timeseries',
-              label: 'Date',
+              label: {
+                text: 'Date',
+                position: 'outer-center'
+              },
               tick: {
-                format: '%Y-%m-%d'
+                format: '%Y-%m-%d',
+                count: 5
               }
+            },
+            y: {
+                inverted: true,
+                default: [1, 50],
+                label: {
+                  text: 'Position',
+                  position: 'outer-middle'
+                }
+              }
+          },
+          grid: {
+            y: {
+              lines: [
+                {value: 10, text: 'Top 10'},
+                {value: 25, text: 'Top 25', class: 'label-200'},
+                {value: 50, text: 'Top 50', position: 'middle'}
+              ]
             }
           },
           legend: {

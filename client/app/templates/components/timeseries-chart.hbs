@@ -1,9 +1,15 @@
-<div id="chart"></div>
-<label>Select keyword:
-<select onchange={{action 'keywordSelect' value='target.value'}}>
-  {{#each data.keywords as |keyword|}}
-    <option value="{{keyword.id}}">{{keyword.keyword}}</option>
-  {{/each}}
-</select>
-</label>
-<img src="{{currentImage}}">
+<div class="chart-area">
+  <div class="chart-wrapper">
+    <div id="chart"></div>
+  </div>
+  <div class="options">
+    <label>Select keyword:
+    <select onchange={{action 'keywordSelect' value='target.value'}}>
+      {{#each data.keywords as |keyword|}}
+        <option value="{{keyword.id}}">{{keyword.keyword}}</option>
+      {{/each}}
+    </select>
+    </label>
+    <img src="{{currentImage}}">
+  </div>
+</div>
