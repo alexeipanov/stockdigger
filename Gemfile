@@ -59,5 +59,5 @@ group :production do
     gem 'mysql2'
 end
 
-gem 'knock'
+gem 'knock', :git => 'git@github.com:alexeipanov/knock.git'
 gem 'whenever', require: false
