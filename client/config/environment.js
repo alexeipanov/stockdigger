@@ -50,8 +50,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURI = 'http://stockdigger.info'
-    ENV.port = 80;
+    ENV.baseURI = 'https://stockdigger.info'
+    ENV.port = 443;
   }
 
   return ENV;

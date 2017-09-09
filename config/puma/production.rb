@@ -15,12 +15,19 @@ port        ENV.fetch("PORT") { 3000 }
 #
 environment ENV.fetch("RAILS_ENV") { "production" }
 
-app_dir = File.expand_path("../..", __FILE__)
+app_dir = File.expand_path("../../../..", __FILE__)
+current_dir = "#{app_dir}/current"
 shared_dir = "#{app_dir}/shared"
-bind "unix://#{app_dir}/puma.sock"
-pidfile "#{shared_dir}/pids/puma.pid"
-state_path "#{shared_dir}/pids/puma.state"
+bind "unix://#{current_dir}/puma.sock"
+pidfile "#{current_dir}/pids/puma.pid"
+state_path "#{current_dir}/pids/puma.state"
 activate_control_app
+
+ssl_bind '127.0.0.1', '3000', {
+   key: "#{app_dir}/stockdigger.info.key",
+   cert: "#{app_dir}/stockdigger.crt"
+}
+
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
