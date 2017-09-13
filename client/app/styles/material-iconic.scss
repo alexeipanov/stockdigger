@@ -24,6 +24,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.zmdi-hc-spin {
+  -webkit-animation: zmdi-spin 1.5s infinite linear;
+          animation: zmdi-spin 1.5s infinite linear;
+}
+.zmdi-hc-spin-reverse {
+  -webkit-animation: zmdi-spin-reverse 1.5s infinite linear;
+          animation: zmdi-spin-reverse 1.5s infinite linear;
+}
+@-webkit-keyframes zmdi-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+@keyframes zmdi-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg);
+  }
+}
+
+
 .icon-chart {
   &:before {
     content: $icon-chart;
@@ -227,5 +257,15 @@
 .icon-list {
   &:before {
     content: $icon-list;
+  }
+}
+.icon-spinner-comet {
+  &:before {
+    content: $icon-spinner-comet;
+  }
+}
+.icon-spinner-dot {
+  &:before {
+    content: $icon-spinner-dot;
   }
 }
