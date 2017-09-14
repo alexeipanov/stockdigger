@@ -82,4 +82,12 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 80 }
+
+  config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'stockdigger.info'
+      resource '*', :headers => :any, :methods => [:get, :post, :patch, :put, :delete, :options]
+    end
+  end
+
 end
