@@ -1,0 +1,1 @@
+/home/windstarter/workspace/stockDigger/lib/tasks/ember.rake
