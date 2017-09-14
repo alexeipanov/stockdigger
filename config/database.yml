@@ -25,7 +25,7 @@ production:
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: stockdigger
-  username: stockdigger
-  password: yOsFCGuKGvql
+  username: Rails.application.secrets.db_username
+  password: Rails.application.secrets.db_password
   host: localhost
   socket: /var/run/mysqld/mysqld.sock
