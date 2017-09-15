@@ -3,7 +3,7 @@ class PickPositionsJob < ApplicationJob
   require 'stock'
 
   def perform
-    shutter = Stock::Shutterstock.new
+    shutter = Stock::Shutterstock.new(client_id: Rails.application.secrets.shutterstock_client_id, client_secret: Rails.application.secrets.shutterstock_client_secret)
     positions = []
     Collection.all.each do |collection|
       collection.keywords.each do |keyword|

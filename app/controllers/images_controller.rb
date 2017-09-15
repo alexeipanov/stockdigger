@@ -16,7 +16,7 @@ class ImagesController < ApplicationController
 
   # POST /images
   def create
-    shutter = Stock::Shutterstock.new({ client_id: '617f8ecd027040e4c0a9', client_secret: 'c11b974dd242055c6bd1301a26091c77c4dcb5db' })
+    shutter = Stock::Shutterstock.new(client_id: Rails.application.secrets.shutterstock_client_id, client_secret: Rails.application.secrets.shutterstock_client_secret)
     url = shutter.get_image(image_params[:image])
     merged_params = image_params
     merged_params['url'] = url
