@@ -4,29 +4,27 @@ RSpec.describe KeywordsController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/keywords").to route_to("keywords#index")
+      expect(:get => "/collections/1/keywords").to route_to("keywords#index", collection_id: '1')
     end
-
 
     it "routes to #show" do
-      expect(:get => "/keywords/1").to route_to("keywords#show", :id => "1")
+      expect(:get => "/collections/1/keywords/1").to route_to("keywords#show", collection_id: '1', id: '1')
     end
 
-
     it "routes to #create" do
-      expect(:post => "/keywords").to route_to("keywords#create")
+      expect(:post => "/collections/1/keywords").to route_to("keywords#create", collection_id: '1')
     end
 
     it "routes to #update via PUT" do
-      expect(:put => "/keywords/1").to route_to("keywords#update", :id => "1")
+      expect(:put => "/collections/1/keywords/1").to route_to("keywords#update", collection_id: '1', id: '1')
     end
 
     it "routes to #update via PATCH" do
-      expect(:patch => "/keywords/1").to route_to("keywords#update", :id => "1")
+      expect(:patch => "/collections/1/keywords/1").to route_to("keywords#update", collection_id: '1', id: '1')
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/keywords/1").to route_to("keywords#destroy", :id => "1")
+      expect(:delete => "/collections/1/keywords/1").to route_to("keywords#destroy", collection_id: '1', id: '1')
     end
 
   end
