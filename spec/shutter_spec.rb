@@ -19,7 +19,7 @@ RSpec.describe Stock::Shutterstock do
     it 'search images' do
       shutter = Stock::Shutterstock.new(credentials)
       result = shutter.search('reggae')
-      expect(result.at(7)['id'].to_i).to eq 487421065
+      expect(result.at(7)['id'].to_i).to eq 492046210
       result = shutter.search('iuaewrksdnmf')
       expect(result.empty?).to eq true
     end
