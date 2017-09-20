@@ -45,7 +45,7 @@ append :linked_files, 'config/secrets.yml.key'
 
 # Default value for linked_dirs is []
 # append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
-append :linked_dirs, 'log', 'pids', 'cache', 'public', 'bin'
+append :linked_dirs, 'pids', 'cache', 'public'
 
 # Default value for default_env is {}
 # set :default_env, { path: '/opt/ruby/bin:$PATH' }
@@ -56,5 +56,4 @@ append :linked_dirs, 'log', 'pids', 'cache', 'public', 'bin'
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-after 'deploy:finishing', 'ember:build'
-after 'ember:build', 'ember:upload'
+after 'deploy:finishing', 'ember:build', 'ember:upload'
