@@ -23,91 +23,77 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe PositionsController, type: :controller do
-
+RSpec.describe UsersController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
-  # Position. As you add validations to Position, be sure to
+  # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     { data:
       { attributes:
-        { position: 10, image_id: 1, keyword_id: 1 },
-        type: 'positions'
-      },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+        { name: 'asdfsdf', email: 'sd3f@ksjadf.com', password: '456789123', password_confirmation: '456789123' },
+        type: 'users'
+      }
     }
   end
 
-  let(:invalid_attributes) do
+  let(:invalid_attributes) {
     { data:
       { attributes:
-        { position: nil, image_id: nil, keyword_id: nil },
-        type: 'positions'
-      },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+        { name: '', email: 'sd4f@ksjadf', password: '654', password_confirmation: '782' },
+        type: 'users'
+      }
     }
-  end
+  }
 
   let(:new_attributes) do
     { data:
       { attributes:
-        { position: 20, image_id: 1, keyword_id: 1 },
-        type: 'positions'
-      },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+        { name: 'new name', email: 'sd4f@ksjadf.com', password: '789564654654654', password_confirmation: '789564654654654' },
+        type: 'users'
+      }
     }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # PositionsController. Be sure to keep this updated too.
+  # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe 'GET #index' do
     it 'returns a success response' do
-      position = Position.create! valid_attributes[:data][:attributes]
-      prepare_request(1)
-      get :index, params: { collection_id: 1 }, session: valid_session
+      # user = User.create! valid_attributes[:data][:attributes]
+      get :index, params: {}, session: valid_session
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      position = Position.create! valid_attributes[:data][:attributes]
-      prepare_request(1)
-      get :show, params: { collection_id: 1, id: position.id }, session: valid_session
+      user = User.create! valid_attributes[:data][:attributes]
+      prepare_request(user.id)
+      get :show, params: { id: user.id }, session: valid_session
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'POST #create' do
     context 'with valid params' do
-      it 'creates a new Position' do
+      it 'creates a new User' do
         expect {
-          prepare_request(1)
           post :create, params: valid_attributes, session: valid_session
-        }.to change(Position, :count).by(1)
+        }.to change(User, :count).by(1)
       end
 
-      it 'renders a JSON response with the new position' do
-        prepare_request(1)
+      it 'renders a JSON response with the new user' do
         post :create, params: valid_attributes, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/vnd.api+json')
-        expect(response.location).to eq(collection_position_url(Position.last.image.collection_id, Position.last))
+        expect(response.location).to eq(user_url(User.last))
       end
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the new position' do
-        prepare_request(1)
+      it 'renders a JSON response with errors for the new user' do
         post :create, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/vnd.api+json')
@@ -117,19 +103,19 @@ RSpec.describe PositionsController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      it 'updates the requested position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        new_attributes[:id] = position.id
-        prepare_request(1)
+      it 'updates the requested user' do
+        user = User.create! valid_attributes[:data][:attributes]
+        prepare_request(user.id)
+        new_attributes[:id] = user.id
         put :update, params: new_attributes, session: valid_session
-        position.reload
-        expect(position.position).to eq(new_attributes[:data][:attributes][:position])
+        user.reload
+        expect(user.name).to eq(new_attributes[:data][:attributes][:name])
       end
 
-      it 'renders a JSON response with the position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        new_attributes[:id] = position.id
-        prepare_request(1)
+      it 'renders a JSON response with the user' do
+        user = User.create! valid_attributes[:data][:attributes]
+        prepare_request(user.id)
+        new_attributes[:id] = user.id
         put :update, params: new_attributes, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/vnd.api+json')
@@ -137,10 +123,10 @@ RSpec.describe PositionsController, type: :controller do
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        invalid_attributes[:id] = position.id
-        prepare_request(1)
+      it 'renders a JSON response with errors for the user' do
+        user = User.create! valid_attributes[:data][:attributes]
+        invalid_attributes[:id] = user.id
+        prepare_request(user.id)
         put :update, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/vnd.api+json')
@@ -149,13 +135,22 @@ RSpec.describe PositionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'destroys the requested position' do
-      position = Position.create! valid_attributes[:data][:attributes]
+    it 'destroys the requested user' do
+      user = User.create! valid_attributes[:data][:attributes]
+      prepare_request(user.id)
       expect {
-        prepare_request(1)
-        delete :destroy, params: { collection_id: 1, id: position.to_param }, session: valid_session
-      }.to change(Position, :count).by(-1)
+        delete :destroy, params: { id: user.to_param }, session: valid_session
+      }.to change(User, :count).by(-1)
     end
   end
 
+  describe '#me' do
+    it 'get currently authorized user' do
+      user = User.create! valid_attributes[:data][:attributes]
+      prepare_request(user.id)
+      get :me, params: {}, session: valid_session
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)['data']['attributes']['name']).to eq('asdfsdf')
+    end
+  end
 end

@@ -23,90 +23,84 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe PositionsController, type: :controller do
+RSpec.describe ImagesController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Position. As you add validations to Position, be sure to
+  # Image. As you add validations to Image, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     { data:
       { attributes:
-        { position: 10, image_id: 1, keyword_id: 1 },
-        type: 'positions'
+        { image: '6545897987987', collection_id: 1, url: 'url_1' },
+        type: 'images'
       },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+      collection_id: 1
     }
   end
 
   let(:invalid_attributes) do
     { data:
       { attributes:
-        { position: nil, image_id: nil, keyword_id: nil },
-        type: 'positions'
+        { image: nil, collection_id: nil, url: nil },
+        type: 'images'
       },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+      collection_id: 1
     }
   end
 
   let(:new_attributes) do
     { data:
       { attributes:
-        { position: 20, image_id: 1, keyword_id: 1 },
-        type: 'positions'
+        { image: '7545897987987', url: 'url_2' },
+        type: 'images'
       },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+      collection_id: 1
     }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # PositionsController. Be sure to keep this updated too.
+  # ImagesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe 'GET #index' do
-    it 'returns a success response' do
-      position = Position.create! valid_attributes[:data][:attributes]
+  describe "GET #index" do
+    it "returns a success response" do
+      image = Image.create! valid_attributes[:data][:attributes]
       prepare_request(1)
       get :index, params: { collection_id: 1 }, session: valid_session
       expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'GET #show' do
-    it 'returns a success response' do
-      position = Position.create! valid_attributes[:data][:attributes]
+  describe "GET #show" do
+    it "returns a success response" do
+      image = Image.create! valid_attributes[:data][:attributes]
       prepare_request(1)
-      get :show, params: { collection_id: 1, id: position.id }, session: valid_session
+      get :show, params: { collection_id: 1, id: image.id }, session: valid_session
       expect(response).to have_http_status(:ok)
     end
   end
 
-  describe 'POST #create' do
-    context 'with valid params' do
-      it 'creates a new Position' do
+  describe "POST #create" do
+    context "with valid params" do
+      it "creates a new Image" do
         expect {
           prepare_request(1)
           post :create, params: valid_attributes, session: valid_session
-        }.to change(Position, :count).by(1)
+        }.to change(Image, :count).by(1)
       end
 
-      it 'renders a JSON response with the new position' do
+      it "renders a JSON response with the new image" do
         prepare_request(1)
         post :create, params: valid_attributes, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/vnd.api+json')
-        expect(response.location).to eq(collection_position_url(Position.last.image.collection_id, Position.last))
+        expect(response.location).to eq(collection_image_url(Image.last.collection_id, Image.last))
       end
     end
 
-    context 'with invalid params' do
-      it 'renders a JSON response with errors for the new position' do
+    context "with invalid params" do
+      it "renders a JSON response with errors for the new image" do
         prepare_request(1)
         post :create, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
@@ -115,31 +109,31 @@ RSpec.describe PositionsController, type: :controller do
     end
   end
 
-  describe 'PUT #update' do
-    context 'with valid params' do
-      it 'updates the requested position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        new_attributes[:id] = position.id
+  describe "PUT #update" do
+    context "with valid params" do
+      it "updates the requested image" do
+        image = Image.create! valid_attributes[:data][:attributes]
+        new_attributes[:id] = image.id
         prepare_request(1)
         put :update, params: new_attributes, session: valid_session
-        position.reload
-        expect(position.position).to eq(new_attributes[:data][:attributes][:position])
+        image.reload
+        expect(image.url).to eq(new_attributes[:data][:attributes][:url])
       end
 
-      it 'renders a JSON response with the position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        new_attributes[:id] = position.id
+      it "renders a JSON response with the image" do
+        image = Image.create! valid_attributes[:data][:attributes]
+        valid_attributes[:id] = image.id
         prepare_request(1)
-        put :update, params: new_attributes, session: valid_session
+        put :update, params: valid_attributes, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/vnd.api+json')
       end
     end
 
-    context 'with invalid params' do
-      it 'renders a JSON response with errors for the position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        invalid_attributes[:id] = position.id
+    context "with invalid params" do
+      it "renders a JSON response with errors for the image" do
+        image = Image.create! valid_attributes[:data][:attributes]
+        invalid_attributes[:id] = image.id
         prepare_request(1)
         put :update, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
@@ -148,13 +142,13 @@ RSpec.describe PositionsController, type: :controller do
     end
   end
 
-  describe 'DELETE #destroy' do
-    it 'destroys the requested position' do
-      position = Position.create! valid_attributes[:data][:attributes]
+  describe "DELETE #destroy" do
+    it "destroys the requested image" do
+      image = Image.create! valid_attributes[:data][:attributes]
       expect {
         prepare_request(1)
-        delete :destroy, params: { collection_id: 1, id: position.to_param }, session: valid_session
-      }.to change(Position, :count).by(-1)
+        delete :destroy, params: { collection_id: 1, id: image.to_param }, session: valid_session
+      }.to change(Image, :count).by(-1)
     end
   end
 

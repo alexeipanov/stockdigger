@@ -23,90 +23,81 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe PositionsController, type: :controller do
+RSpec.describe CollectionsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Position. As you add validations to Position, be sure to
+  # Collection. As you add validations to Collection, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     { data:
       { attributes:
-        { position: 10, image_id: 1, keyword_id: 1 },
-        type: 'positions'
-      },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+        { name: 'test_collection', user_id: 1 },
+        type: 'collections'
+      }
     }
   end
 
   let(:invalid_attributes) do
     { data:
       { attributes:
-        { position: nil, image_id: nil, keyword_id: nil },
-        type: 'positions'
-      },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+        { name: nil, user_id: 1 },
+        type: 'collections'
+      }
     }
   end
 
   let(:new_attributes) do
     { data:
       { attributes:
-        { position: 20, image_id: 1, keyword_id: 1 },
-        type: 'positions'
-      },
-      collection_id: 1,
-      image_id: 1,
-      keyword_id: 1
+        { name: 'new name' },
+        type: 'collections'
+      }
     }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # PositionsController. Be sure to keep this updated too.
+  # CollectionsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe 'GET #index' do
     it 'returns a success response' do
-      position = Position.create! valid_attributes[:data][:attributes]
       prepare_request(1)
-      get :index, params: { collection_id: 1 }, session: valid_session
+      collection = Collection.create! valid_attributes[:data][:attributes]
+      get :index, params: {}, session: valid_session
       expect(response).to have_http_status(:ok)
     end
   end
 
   describe 'GET #show' do
     it 'returns a success response' do
-      position = Position.create! valid_attributes[:data][:attributes]
       prepare_request(1)
-      get :show, params: { collection_id: 1, id: position.id }, session: valid_session
-      expect(response).to have_http_status(:ok)
+      collection = Collection.create! valid_attributes[:data][:attributes]
+      get :show, params: { id: collection.id }, session: valid_session
+      expect(response).to be_success
     end
   end
 
   describe 'POST #create' do
     context 'with valid params' do
-      it 'creates a new Position' do
+      it 'creates a new Collection' do
         expect {
           prepare_request(1)
           post :create, params: valid_attributes, session: valid_session
-        }.to change(Position, :count).by(1)
+        }.to change(Collection, :count).by(1)
       end
 
-      it 'renders a JSON response with the new position' do
+      it 'renders a JSON response with the new collection' do
         prepare_request(1)
         post :create, params: valid_attributes, session: valid_session
         expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/vnd.api+json')
-        expect(response.location).to eq(collection_position_url(Position.last.image.collection_id, Position.last))
+        expect(response.location).to eq(collection_url(Collection.last))
       end
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the new position' do
+      it 'renders a JSON response with errors for the new collection' do
         prepare_request(1)
         post :create, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
@@ -117,18 +108,19 @@ RSpec.describe PositionsController, type: :controller do
 
   describe 'PUT #update' do
     context 'with valid params' do
-      it 'updates the requested position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        new_attributes[:id] = position.id
+
+      it 'updates the requested collection' do
+        collection = Collection.create! valid_attributes[:data][:attributes]
+        new_attributes[:id] = collection.id
         prepare_request(1)
         put :update, params: new_attributes, session: valid_session
-        position.reload
-        expect(position.position).to eq(new_attributes[:data][:attributes][:position])
+        collection.reload
+        expect(collection.name).to eq(new_attributes[:data][:attributes][:name])
       end
 
-      it 'renders a JSON response with the position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        new_attributes[:id] = position.id
+      it 'renders a JSON response with the collection' do
+        collection = Collection.create! valid_attributes[:data][:attributes]
+        new_attributes[:id] = collection.id
         prepare_request(1)
         put :update, params: new_attributes, session: valid_session
         expect(response).to have_http_status(:created)
@@ -137,9 +129,9 @@ RSpec.describe PositionsController, type: :controller do
     end
 
     context 'with invalid params' do
-      it 'renders a JSON response with errors for the position' do
-        position = Position.create! valid_attributes[:data][:attributes]
-        invalid_attributes[:id] = position.id
+      it 'renders a JSON response with errors for the collection' do
+        collection = Collection.create! valid_attributes[:data][:attributes]
+        invalid_attributes[:id] = collection.id
         prepare_request(1)
         put :update, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
@@ -149,13 +141,12 @@ RSpec.describe PositionsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    it 'destroys the requested position' do
-      position = Position.create! valid_attributes[:data][:attributes]
+    it 'destroys the requested collection' do
+      collection = Collection.create! valid_attributes[:data][:attributes]
+      prepare_request(1)
       expect {
-        prepare_request(1)
-        delete :destroy, params: { collection_id: 1, id: position.to_param }, session: valid_session
-      }.to change(Position, :count).by(-1)
+        delete :destroy, params: { id: collection.to_param }, session: valid_session
+      }.to change(Collection, :count).by(-1)
     end
   end
-
 end

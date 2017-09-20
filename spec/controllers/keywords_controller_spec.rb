@@ -28,102 +28,127 @@ RSpec.describe KeywordsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Keyword. As you add validations to Keyword, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    { data:
+      { attributes:
+        { keyword: 'word', collection_id: 1 },
+        type: 'keywords'
+      },
+      collection_id: 1
+    }
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) do
+    { data:
+      { attributes:
+        { keyword: nil, collection_id: nil },
+        type: 'keywords'
+      },
+      collection_id: 1
+    }
+  end
+
+  let(:new_attributes) do
+    { data:
+      { attributes:
+        { keyword: 'new name' },
+        type: 'keywords'
+      },
+      collection_id: 1
+    }
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # KeywordsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      keyword = Keyword.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_success
+  describe 'GET #index' do
+    it 'returns a success response' do
+      prepare_request(1)
+      keyword = Keyword.create! valid_attributes[:data][:attributes]
+      get :index, params: { collection_id: 1 }, session: valid_session
+      expect(response).to have_http_status(:ok)
     end
   end
 
-  describe "GET #show" do
-    it "returns a success response" do
-      keyword = Keyword.create! valid_attributes
-      get :show, params: {id: keyword.to_param}, session: valid_session
-      expect(response).to be_success
+  describe 'GET #show' do
+    it 'returns a success response' do
+      prepare_request(1)
+      keyword = Keyword.create! valid_attributes[:data][:attributes]
+      get :show, params: { collection_id: 1, id: keyword.id }, session: valid_session
+      expect(response).to have_http_status(:ok)
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Keyword" do
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new Keyword' do
         expect {
-          post :create, params: {keyword: valid_attributes}, session: valid_session
+          prepare_request(1)
+          post :create, params: valid_attributes, session: valid_session
         }.to change(Keyword, :count).by(1)
       end
 
-      it "renders a JSON response with the new keyword" do
-
-        post :create, params: {keyword: valid_attributes}, session: valid_session
+      it 'renders a JSON response with the new keyword' do
+        prepare_request(1)
+        post :create, params: valid_attributes, session: valid_session
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(keyword_url(Keyword.last))
+        expect(response.content_type).to eq('application/vnd.api+json')
+        expect(response.location).to eq(collection_keyword_url(Keyword.last.collection_id, Keyword.last))
       end
     end
 
-    context "with invalid params" do
-      it "renders a JSON response with errors for the new keyword" do
-
-        post :create, params: {keyword: invalid_attributes}, session: valid_session
+    context 'with invalid params' do
+      it 'renders a JSON response with errors for the new keyword' do
+        prepare_request(1)
+        post :create, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/vnd.api+json')
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested keyword" do
-        keyword = Keyword.create! valid_attributes
-        put :update, params: {id: keyword.to_param, keyword: new_attributes}, session: valid_session
+  describe 'PUT #update' do
+    context 'with valid params' do
+      it 'updates the requested keyword' do
+        keyword = Keyword.create! valid_attributes[:data][:attributes]
+        new_attributes[:id] = keyword.id
+        prepare_request(1)
+        put :update, params: new_attributes, session: valid_session
         keyword.reload
-        skip("Add assertions for updated state")
+        expect(keyword.keyword).to eq(new_attributes[:data][:attributes][:keyword])
       end
 
-      it "renders a JSON response with the keyword" do
-        keyword = Keyword.create! valid_attributes
-
-        put :update, params: {id: keyword.to_param, keyword: valid_attributes}, session: valid_session
-        expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq('application/json')
+      it 'renders a JSON response with the keyword' do
+        keyword = Keyword.create! valid_attributes[:data][:attributes]
+        valid_attributes[:id] = keyword.id
+        prepare_request(1)
+        put :update, params: valid_attributes, session: valid_session
+        expect(response).to have_http_status(:created)
+        expect(response.content_type).to eq('application/vnd.api+json')
       end
     end
 
-    context "with invalid params" do
-      it "renders a JSON response with errors for the keyword" do
-        keyword = Keyword.create! valid_attributes
-
-        put :update, params: {id: keyword.to_param, keyword: invalid_attributes}, session: valid_session
+    context 'with invalid params' do
+      it 'renders a JSON response with errors for the keyword' do
+        keyword = Keyword.create! valid_attributes[:data][:attributes]
+        invalid_attributes[:id] = keyword.id
+        prepare_request(1)
+        put :update, params: invalid_attributes, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/vnd.api+json')
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested keyword" do
-      keyword = Keyword.create! valid_attributes
+  describe 'DELETE #destroy' do
+    it 'destroys the requested keyword' do
+      keyword = Keyword.create! valid_attributes[:data][:attributes]
       expect {
-        delete :destroy, params: {id: keyword.to_param}, session: valid_session
+        prepare_request(1)
+        delete :destroy, params: { collection_id: 1, id: keyword.to_param }, session: valid_session
       }.to change(Keyword, :count).by(-1)
     end
   end
-
 end
