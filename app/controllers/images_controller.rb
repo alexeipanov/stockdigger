@@ -20,12 +20,9 @@ class ImagesController < ApplicationController
     url = shutter.get_image(image_params[:image])
     merged_params = image_params
     merged_params['url'] = url
-    # merged_params['user_id'] = current_user.id
     @image = Image.new(merged_params)
-    # User.find(params[:user_id]).update()images.new(image_params)
     if @image.save
-      render json: @image, status: :created
-      # , location: @image
+      render json: @image, status: :created, location: collection_image_url(@image.collection_id, @image)
     else
       render json: @image, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
@@ -34,9 +31,9 @@ class ImagesController < ApplicationController
   # PATCH/PUT /images/1
   def update
     if @image.update(image_params)
-      render json: @image
+      render json: @image, status: :created, location: collection_image_url(@image.collection_id, @image)
     else
-      render json: @image.errors, status: :unprocessable_entity
+      render json: @image, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
@@ -56,6 +53,6 @@ class ImagesController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def image_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:image, :url, :collection_id, :collection, :user, :id])
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:image, :url, :collection_id, :id])
   end
 end

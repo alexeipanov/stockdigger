@@ -1,6 +1,6 @@
 class KeywordsController < ApplicationController
-  before_action :set_keyword, only: [:show, :update, :destroy]
   before_action :authenticate_user
+  before_action :set_keyword, only: [:show, :update, :destroy]
 
   # GET /keywords
   def index
@@ -18,19 +18,18 @@ class KeywordsController < ApplicationController
     @keyword = Keyword.new(keyword_params)
 
     if @keyword.save
-      render json: @keyword, status: :created
-      #, location: @keyword
+      render json: @keyword, status: :created, location: collection_keyword_url(@keyword.collection_id, @keyword)
     else
-      render json: @keyword.errors, status: :unprocessable_entity
+      render json: @keyword, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
   # PATCH/PUT /keywords/1
   def update
     if @keyword.update(keyword_params)
-      render json: @keyword
+      render json: @keyword, status: :created, location: collection_keyword_url(@keyword.collection_id, @keyword)
     else
-      render json: @keyword.errors, status: :unprocessable_entity
+      render json: @keyword, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
@@ -38,7 +37,6 @@ class KeywordsController < ApplicationController
   def destroy
     if @keyword.destroy
       render json: @keyword, status: :no_content
-      # , location: @keyword
     end
   end
 
@@ -50,7 +48,6 @@ class KeywordsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def keyword_params
-      # params.require(:keyword).permit(:keyword, :collection_id)
-      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:keyword, :collection_id, :user, :id, :collection])
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:keyword, :collection_id, :id])
     end
 end

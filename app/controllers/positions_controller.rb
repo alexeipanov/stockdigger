@@ -3,7 +3,7 @@ class PositionsController < ApplicationController
 
   # GET /positions
   def index
-    @positions = Position.joins(:image).where('keyword_id = :keyword AND images.collection_id = :collection', { collection: params[:collection_id], keyword: params[:keyword_id] })
+    @positions = Position.joins(:image).where('keyword_id = :keyword AND images.collection_id = :collection', { collection: position_params[:collection_id], keyword: position_params[:keyword_id] })
     render json: @positions
   end
 
@@ -17,18 +17,18 @@ class PositionsController < ApplicationController
     @position = Position.new(position_params)
 
     if @position.save
-      render json: @position, status: :created, location: @position
+      render json: @position, status: :created, location: collection_position_url(@position.image.collection_id, @position)
     else
-      render json: @position.errors, status: :unprocessable_entity
+      render json: @position, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
   # PATCH/PUT /positions/1
   def update
     if @position.update(position_params)
-      render json: @position
+      render json: @position, status: :created, location: collection_position_url(@position.image.collection_id, @position)
     else
-      render json: @position.errors, status: :unprocessable_entity
+      render json: @position, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
@@ -45,7 +45,6 @@ class PositionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def position_params
-      # params.require(:position).permit(:position, :image_id, :keyword_id)
-      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:position, :image_id, :keyword_id, :collection_id, :user, :id, :collection])
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:position, :image_id, :keyword_id, :collection_id, :id])
     end
 end

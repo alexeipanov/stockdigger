@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
-  before_action :set_collection, only: [:show, :update, :destroy]
   before_action :authenticate_user
+  before_action :set_collection, only: [:show, :update, :destroy]
 
   # GET /collections
   def index
@@ -29,16 +29,16 @@ class CollectionsController < ApplicationController
   # PATCH/PUT /collections/1
   def update
     if @collection.update(collection_params)
-      render json: @collection
+      render json: @collection, status: :created, location: @collection
     else
-      render json: @collection.errors, status: :unprocessable_entity
+      render json: @collection, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
   # DELETE /collections/1
   def destroy
     if @collection.destroy
-      render json: @collection, status: :no_content, location: @collection
+      render json: @collection, status: :no_content
     end
   end
 
@@ -51,6 +51,6 @@ class CollectionsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def collection_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name, :user, :id, :user_id])
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:name, :id])
   end
 end
