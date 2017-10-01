@@ -24,7 +24,7 @@ export default Ember.Component.extend({
         this.send('error', error);
       });
     },
-    error(error, transition) {
+    error(error) {
       if (error instanceof DS.ServerError) {
         this.get('router').transitionTo('server-down');
       }
