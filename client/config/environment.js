@@ -1,20 +1,21 @@
-/* jshint node: true */
+/* eslint-env node */
+'use strict';
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'client',
+    // environment,
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
-    podModulePrefix: 'client',
-    contentSecurityPolicy: {
-      'connect-src': "*"
-    },
+    // podModulePrefix: 'client',
+    // contentSecurityPolicy: {
+    //   'connect-src': "*"
+    // },
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
-        // 'ds-extended-errors': true
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
