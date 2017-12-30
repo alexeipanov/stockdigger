@@ -15,5 +15,15 @@ export default Ember.Component.extend({
         }
       );
     },
+    fblogin() {
+      this.get('session').authenticate('authenticator:torii', 'facebook').then(
+        () => {
+          this.sendAction('onSuccess');
+        },
+        (reason) => {
+          this.set('errorMessage', reason.statusText);
+        }
+      );
+    }
   }
 });

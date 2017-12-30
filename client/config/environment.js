@@ -26,7 +26,18 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+    },
+
+    torii: {
+      sessionServiceName: 'session',
+      providers: {
+        'facebook-oauth2': {
+          apiKey: '140524983279723',
+          redirectUri: 'https://stockdigger.info/login',
+        }
+      }
     }
+
   };
 
   if (environment === 'development') {
